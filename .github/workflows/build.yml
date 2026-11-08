@@ -1,0 +1,47 @@
+name: APK bauen
+
+on:
+  push:
+    branches: ['**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code holen
+        uses: actions/checkout@v4
+
+      - name: Java einrichten
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Gradle einrichten
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: APK bauen
+        run: gradle assembleDebug --no-daemon
+
+      - name: APK umbenennen
+        run: cp app/build/outputs/apk/debug/app-debug.apk JellyWeb-TV.apk
+
+      - name: APK als Download bereitstellen (Actions-Artefakt)
+        uses: actions/upload-artifact@v4
+        with:
+          name: JellyWeb-TV-APK
+          path: JellyWeb-TV.apk
+
+      - name: APK als Release veröffentlichen (feste Download-Adresse)
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: apk-latest
+          name: JellyWeb TV (aktuelle Version)
+          body: Direkter Download der aktuellen APK-Datei.
+          files: JellyWeb-TV.apk
