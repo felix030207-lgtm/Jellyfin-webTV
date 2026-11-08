@@ -11,36 +11,13 @@ Gedacht für Android TV / Google TV und den Raspberry Pi mit LineageOS Android T
 
 ---
 
-## Einmalig: App-Datei (APK) bauen lassen (ca. 5 Minuten)
-
-Die APK wird kostenlos von GitHub gebaut – du musst nichts installieren.
-
-1. Kostenloses Konto auf <https://github.com> anlegen (oder einloggen).
-2. Oben rechts **+ → New repository**. Name z. B. `jellyweb-tv`, **Public** auswählen,
-   **Create repository**.
-3. Diesen Ordner entpacken. Auf der neuen leeren Repository-Seite auf **uploading an existing file**
-   klicken und den **gesamten Inhalt** des Ordners per Drag & Drop hineinziehen
-   (auch den versteckten Ordner `.github` – am einfachsten alles im Ordner markieren und ziehen).
-   Unten **Commit changes** klicken.
-4. Oben auf **Actions** klicken. Dort läuft jetzt „APK bauen“ (gelber Punkt). Nach 3–5 Minuten
-   ist er grün.
-   - Wenn er rot wird: auf den Lauf klicken, den Fehlertext kopieren und mir schicken.
-5. Die fertige Datei findest du auf der Repository-Startseite rechts unter **Releases →
-   JellyWeb TV (aktuelle Version) → `JellyWeb-TV.apk`**.
-
-Die feste Download-Adresse ist danach:
-
-```
-https://github.com/DEIN-NAME/jellyweb-tv/releases/download/apk-latest/JellyWeb-TV.apk
-```
-
 ## Auf den Fernseher bringen
 
 Eine der beiden Möglichkeiten:
 
 - **USB-Stick:** APK auf den Stick kopieren, Stick in den Pi/Fernseher, mit der
   „Dateien“-App öffnen und installieren (ggf. „Aus unbekannten Quellen installieren“ erlauben).
-- **Downloader-App** (kostenlos im Play Store): dort die Adresse von oben eingeben,
+- **Downloader-App** (kostenlos im Play Store): dort die Adresse eingeben,
   herunterladen, installieren.
 
 ## Benutzen
