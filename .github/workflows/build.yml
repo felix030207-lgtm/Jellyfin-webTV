@@ -27,10 +27,15 @@ jobs:
           gradle-version: '8.9'
 
       - name: APK bauen
-        run: gradle assembleDebug --no-daemon
-
-      - name: APK umbenennen
-        run: cp app/build/outputs/apk/debug/app-debug.apk JellyWeb-TV.apk
+        run: |
+          S=$(find . -name settings.gradle -not -path './.git/*' | head -n 1)
+          if [ -z "$S" ]; then
+            echo "FEHLER: settings.gradle fehlt im Repository - die Projektdateien wurden nicht hochgeladen."
+            exit 1
+          fi
+          cd "$(dirname "$S")"
+          gradle assembleDebug --no-daemon
+          cp app/build/outputs/apk/debug/app-debug.apk "$GITHUB_WORKSPACE/JellyWeb-TV.apk"
 
       - name: APK als Download bereitstellen (Actions-Artefakt)
         uses: actions/upload-artifact@v4
