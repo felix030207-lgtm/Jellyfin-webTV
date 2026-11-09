@@ -30,6 +30,14 @@ jobs:
         run: |
           S=$(find . -name settings.gradle -not -path './.git/*' | head -n 1)
           if [ -z "$S" ]; then
+            Z=$(find . -maxdepth 1 -name '*.zip' | head -n 1)
+            if [ -n "$Z" ]; then
+              echo "Projekt liegt als ZIP im Repository - wird entpackt: $Z"
+              unzip -q "$Z" -d _projekt
+              S=$(find _projekt -name settings.gradle | head -n 1)
+            fi
+          fi
+          if [ -z "$S" ]; then
             echo "FEHLER: settings.gradle fehlt im Repository - die Projektdateien wurden nicht hochgeladen."
             exit 1
           fi
